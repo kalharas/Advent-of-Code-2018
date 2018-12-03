@@ -20,11 +20,11 @@ namespace AdventCode2018
                switch(selection)
                {
                    case 1:
-                   frequencies = ParseInputs(@"Inputs\Day1_q1.txt");
+                   frequencies = ParseInputs(@"Inputs\Day1input.txt");
                    CalibrationManager.PrintSums(frequencies);
                    break;
                    case 2:
-                   frequencies = ParseInputs(@"Inputs\Day1_q2.txt");
+                   frequencies = ParseInputs(@"Inputs\Day1input.txt");
                    CalibrationManager.CalibrateEveryTwice(frequencies);
                    break;
                    default:

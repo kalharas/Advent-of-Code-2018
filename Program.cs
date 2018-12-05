@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using AdventCode2018.Puzzles.Day1;
 using AdventCode2018.Puzzles.Day2;
+using AdventCode2018.Helpers;
+using AdventCode2018.Puzzles.Day3;
 
 namespace AdventCode2018
 {
@@ -14,6 +16,8 @@ namespace AdventCode2018
            Console.WriteLine("Which puzzle to solve:");
            Console.WriteLine("1- Day 1");
            Console.WriteLine("2- Day 2");
+           Console.WriteLine("3- Day 3");
+           Console.WriteLine("4- Day 4");
            var a = Console.ReadLine();
            List<int> frequencies;
            List<string> idList;
@@ -31,6 +35,12 @@ namespace AdventCode2018
                    Scanner.ShowCheckSum(idList);
                    Scanner.FindAdjescentBox(idList);
                    break;
+                   case 3:
+                   var claimsInputList = ParseStrings(@"Inputs\Day3input.txt");
+                   var claims = ClaimFactory.ParseClaims(claimsInputList);
+                   Tailor.FindOverlaps(claims);
+                   break;
+                   case 4:
                    default:
                    break;
                }

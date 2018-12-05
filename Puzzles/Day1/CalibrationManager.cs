@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace AdventCode2018.Day1
+namespace AdventCode2018.Puzzles.Day1
 {
     public static class CalibrationManager
     {
-        public static void CalibrateEveryTwice(List<int> frequencies)
+        internal static void CalibrateEveryTwice(List<int> frequencies)
         {
             Dictionary<int, int> calibratedFrequency = new Dictionary<int, int>();
             //Initial calibration is 0 so it needs to be counted.
@@ -35,7 +33,7 @@ namespace AdventCode2018.Day1
             }
         }
 
-        public static void PrintSums(List<int> frequencies)
+        internal static void PrintSums(List<int> frequencies)
         {
             var sum = frequencies.Sum();
             Console.WriteLine($"{sum}");

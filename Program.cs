@@ -37,10 +37,14 @@ namespace AdventCode2018
                    break;
                    case 3:
                    var claimsInputList = ParseStrings(@"Inputs\Day3input.txt");
-                   var claims = ClaimFactory.ParseClaims(claimsInputList);
+                   var claims = ParseFactory.ParseClaims(claimsInputList);
                    Tailor.FindOverlaps(claims);
                    break;
                    case 4:
+                   var parsedShifts = ParseStrings(@"Inputs\Day4input.txt");
+                   var sortedShifts = ParseFactory.ParseShifts(parsedShifts);
+                   GuardPicker.FindWeakestGuard(sortedShifts);
+                   break;
                    default:
                    break;
                }

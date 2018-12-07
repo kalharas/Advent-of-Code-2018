@@ -45,6 +45,10 @@ namespace AdventCode2018
                    var sortedShifts = ParseFactory.ParseShifts(parsedShifts);
                    GuardPicker.FindWeakestGuard(sortedShifts);
                    break;
+                   case 5:
+                   var parsedPolymer = ParseString(@"Inputs\Day5input.txt");
+                   Polymerizer.React(parsedPolymer);
+                   break;
                    default:
                    break;
                }
@@ -61,6 +65,12 @@ namespace AdventCode2018
         {
             var inputFile = File.ReadAllLines(path).ToList<string>();
             return inputFile;
+        }
+
+        public static string ParseString(string path)
+        {
+            var inputFile = File.ReadAllText(path);
+            return inputFile.ToString();
         }
     }
 }

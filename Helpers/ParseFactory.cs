@@ -28,6 +28,7 @@ namespace AdventCode2018.Helpers
         public static List<Shift> ParseShifts(List<string> inputs)
         {
             List<Shift> shifts = new List<Shift>();
+            int id = 0;
             foreach(var input in inputs)
             {
                 var shiftTimeString = input.Substring(1, 16);
@@ -36,9 +37,11 @@ namespace AdventCode2018.Helpers
                 var shift = new Shift()
                 {
                     shiftTime = shiftDate,
-                    info = info
+                    info = info,
+                    shiftId = id
                 };
                 shifts.Add(shift);
+                id++;
                 //var dateRegex = Regex.Match(input, @"\[([^]]+)\]").Groups[1].Value;
                 // Console.WriteLine($"{dateRegex}");
             }

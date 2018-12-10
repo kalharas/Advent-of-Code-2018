@@ -1,47 +1,35 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading.Tasks;
 using Helpers.Extensions;
 
-public static class Polymerizer{
-    public static void React(string input)
+public class Polymerizer{
+    public void React(string input)
     {
-        ReactNormally(input);
-    }
+        var alphabet = "abcdefghijklmnopqrstuvwxyz";
+        var maxReactive = int.MaxValue;
+        CultureInfo culture = CultureInfo.CurrentCulture;
 
-
-    // private static void Reacting(string input)
-    // {
-    //     if (count <= 1)
-    //     {
-    //         return;
-    //     }
-    //     var a = input[0];
-    //     var b = input[1];
-    //     if(a.CanReact(b))
-    //     {
-    //         input = input.Remove(0,2);
-    //         Reacting(input, input.Length);
-    //     }
-    //     else
-    //     {
-    //         input = input.Substring(1);
-    //         Reacting(input, input.Length);
-    //     }
-    // }
-
-    private static string RemoveReactives(string input)
-    {
-        var len = input.Length;
-        var output = string.Empty;
-        if (input[0].CanReact(input[1]))
+        foreach(var character in alphabet) 
         {
-            output = input.Remove(0, 2);
-            return RemoveReactives(output);
-        }
-        return input;
+            var newInput = input.Replace(character.ToString(), "", true, culture);
+            var result = ReactNormally(newInput);
+            if (result <= maxReactive)
+            {
+                maxReactive = result;
+            }
+        };
+        Console.WriteLine($"{maxReactive}");
     }
 
-    private static void ReactNormally(string input)
+    public void ReactPart2(string input)
+    {
+        var result = ReactNormally(input);
+        Console.WriteLine($"{result}");
+    }
+
+    private int ReactNormally(string input)
     {
         var output = string.Empty;
         var copyInput = input;
@@ -71,9 +59,8 @@ public static class Polymerizer{
 
         if (output.Length == input.Length)
         {
-            Console.WriteLine($"{output.Length}");
-            return;
+            return output.Length;
         }
-        ReactNormally(output);
+        return ReactNormally(output);
     }
 }

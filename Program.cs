@@ -13,7 +13,13 @@ namespace AdventCode2018
     {
         static void Main(string[] args)
         {
-           Console.WriteLine("Which puzzle to solve:");
+           var parsedPolymer = ParseString(@"Inputs\Day5input.txt");
+           Polymerizer.React(parsedPolymer);
+        }
+
+        private void RunMethodGroups()
+        {
+            Console.WriteLine("Which puzzle to solve:");
            Console.WriteLine("1- Day 1");
            Console.WriteLine("2- Day 2");
            Console.WriteLine("3- Day 3");

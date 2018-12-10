@@ -8,24 +8,37 @@ public static class Polymerizer{
         ReactNormally(input);
     }
 
-    private static void Reacting(string input, int count)
+
+    // private static void Reacting(string input)
+    // {
+    //     if (count <= 1)
+    //     {
+    //         return;
+    //     }
+    //     var a = input[0];
+    //     var b = input[1];
+    //     if(a.CanReact(b))
+    //     {
+    //         input = input.Remove(0,2);
+    //         Reacting(input, input.Length);
+    //     }
+    //     else
+    //     {
+    //         input = input.Substring(1);
+    //         Reacting(input, input.Length);
+    //     }
+    // }
+
+    private static string RemoveReactives(string input)
     {
-        if (count <= 1)
+        var len = input.Length;
+        var output = string.Empty;
+        if (input[0].CanReact(input[1]))
         {
-            return;
+            output = input.Remove(0, 2);
+            return RemoveReactives(output);
         }
-        var a = input[0];
-        var b = input[1];
-        if(a.CanReact(b))
-        {
-            input = input.Remove(0,2);
-            Reacting(input, input.Length);
-        }
-        else
-        {
-            input = input.Substring(1);
-            Reacting(input, input.Length);
-        }
+        return input;
     }
 
     private static void ReactNormally(string input)
@@ -34,12 +47,16 @@ public static class Polymerizer{
         var copyInput = input;
         var skipNext = false;
         var indexesToRemove = new List<int>();
+        var len = input.Length;
 
-        for (int i  = 0; i < input.Length; i++)
+        for (int i  = 0; i < len; i++)
         {
             if (i + 1 == input.Length)
-                break;
-            if (input[i].CanReact(input[i+1]))
+                {
+                    output += copyInput[i];
+                    break;
+                }
+            if (input[i].CanReact(input[i+1]) && !skipNext)
             {
                 indexesToRemove.Add(i);
                 skipNext = true;
@@ -53,10 +70,10 @@ public static class Polymerizer{
         }
 
         if (output.Length == input.Length)
-{            Console.WriteLine($"{output.Length}");
-    return;
-}
-
+        {
+            Console.WriteLine($"{output.Length}");
+            return;
+        }
         ReactNormally(output);
     }
 }

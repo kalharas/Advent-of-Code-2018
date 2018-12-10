@@ -19,7 +19,7 @@ namespace AdventCode2018
            myPolyzer.React(parsedPolymer);
         }
 
-        private async Task RunMethodGroups()
+        private void RunMethodGroups()
         {
             var frequencies = ParseInputs(@"Inputs\Day1input.txt");
             CalibrationManager.PrintSums(frequencies);

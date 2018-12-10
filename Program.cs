@@ -14,9 +14,10 @@ namespace AdventCode2018
     {
         public static void Main(string[] args)
         {
-           var parsedPolymer = ParseString(@"Inputs\Day5input.txt");
-           var myPolyzer = new Polymerizer();
-           myPolyzer.React(parsedPolymer);
+            var coords = ParseStrings(@"Inputs\Day6.txt");
+            var parsedCoords = ParseFactory.ParseCoordinates(coords);
+            var cabber = new Taxicabber();
+            cabber.FindTheLargestArea(parsedCoords);
         }
 
         private void RunMethodGroups()

@@ -49,5 +49,21 @@ namespace AdventCode2018.Helpers
             var sortedShifts = shifts.OrderBy(p => p.shiftTime).ToList();
             return sortedShifts;
         }
+        public static List<Coordinate> ParseCoordinates(List<string> inputs)
+        {
+            List<Coordinate> coordinates = new List<Coordinate>();
+            var count = 1;
+            foreach(var input in inputs)
+            {
+                var coords = input.Split(',');
+                var x = int.Parse(coords[0]);
+                var y = int.Parse(coords[1]);
+                var newCoord = new Coordinate(x, y, count);
+                count++;
+                coordinates.Add(newCoord);
+            }
+
+            return coordinates;
+        }
     }
 }

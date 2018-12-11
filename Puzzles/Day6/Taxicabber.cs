@@ -24,18 +24,23 @@ public class Taxicabber {
         int[,] grid = new int[maxCoord + 1,maxCoord + 1];
 
         var watchyy = Stopwatch.StartNew();
-        for (int i = 0; i < maxCoord; i++)
+        for (int i = 0; i <= maxCoord; i++)
         {
-            for (int j = 0; j < maxCoord; j++)
+            for (int j = 0; j <= maxCoord; j++)
             {
                 var closestManhatten = int.MaxValue;
-                foreach (var coord in coordinates)
+                foreach (var coordinate in coordinates)
                 {
-                    var distance = CalculateManhattanDistance(i, coord.xAxis, j, coord.yAxis);
+                    var distance = CalculateManhattanDistance(i, coordinate.xAxis, j, coordinate.yAxis);
+                    if(distance == 0)
+                    {
+                        grid[i,j] = coordinate.tag;
+                        break;
+                    }
                     if (distance < closestManhatten)
                     {
                         closestManhatten = distance;
-                        grid[i,j] = coord.tag;
+                        grid[i,j] = coordinate.tag;
                     }
                     else if(distance == closestManhatten)
                     {
@@ -48,7 +53,7 @@ public class Taxicabber {
         var infiniteCoords =new List<Coordinate>(coordinates);
         var tagList = new List<int>();
 
-        for (int i = 0; i < maxCoord; i++)
+        for (int i = 0; i <= maxCoord; i++)
         {
             var tag = grid[0,i];
             if(tag != -1){
@@ -73,6 +78,7 @@ public class Taxicabber {
         var finiteCoords = new List<Coordinate>(coordinates);
         tagList = tagList.Distinct().ToList();
 
+        Console.WriteLine($"{tagList.Count} coordinates to remove");
         foreach(var coordinate in coordinates)
         {
             if (tagList.Contains(coordinate.tag))
@@ -81,15 +87,17 @@ public class Taxicabber {
             }
         }
         
+        Console.WriteLine($"{finiteCoords.Count} coordinates to left");
         Dictionary<int, int> tagCount = new Dictionary<int, int>();
-        var maxCount = 0;
+        
         foreach (var finiteCoord in finiteCoords)
         {
-            for (int i = 0; i < maxCoord; i++)
+            var maxCount = 0;
+            for (int i = 0; i <= maxCoord; i++)
             {
-                for (int j = 0; j < maxCoord; j++)
+                for (int j = 0; j <= maxCoord; j++)
                 {
-                    if (grid[i,j] == finiteCoord.tag)
+                    if (grid[j,i] == finiteCoord.tag)
                     {
                         maxCount++;
                     }
@@ -98,7 +106,13 @@ public class Taxicabber {
             tagCount.Add(finiteCoord.tag, maxCount);
         }
 
-        Console.WriteLine($"{watchyy.ElapsedMilliseconds} miliseconds spent on creating the grid");
+        Console.WriteLine($"{watchyy.ElapsedMilliseconds/1000} seconds spent on creating the grid");
+
+        foreach (var keyValuePair in tagCount)
+        {
+            Console.WriteLine($"Tag: {keyValuePair.Key}, Size:{keyValuePair.Value}");
+        }
+        
         Console.WriteLine($"Size is {tagCount.Max(v => v.Value)}");
         watchyy.Stop();
         //Create the array with 3 dimension: x,y,closest indication
@@ -107,5 +121,29 @@ public class Taxicabber {
     private static int CalculateManhattanDistance(int x1, int x2, int y1, int y2)
     {
         return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
+    }
+
+    private static void PrintGrid(int[,] grid)
+    {
+        for (int i = 0; i <= grid.Length; i++){
+            for (int j = 0; j<= grid.Length; j++){
+                Console.Write($"{grid[j,i]}");
+            }
+            Console.Write("\n");
+        }
+    }
+
+    private static void PrintWithRemovedInfinites(int[,] grid, List<int> tagList)
+    {
+                for (int i = 0; i < grid.Length; i++)
+        {
+            for (int j = 0; j <= grid.Length; j++)
+            {
+                if (tagList.Contains(grid[j, i]))
+                    grid[j, i] = -2;
+                Console.Write($"{grid[j, i]}");
+            }
+            Console.Write("\n");
+        }
     }
 }

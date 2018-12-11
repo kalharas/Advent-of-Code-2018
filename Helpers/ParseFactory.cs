@@ -51,8 +51,9 @@ namespace AdventCode2018.Helpers
         }
         public static List<Coordinate> ParseCoordinates(List<string> inputs)
         {
+            var alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             List<Coordinate> coordinates = new List<Coordinate>();
-            var count = 1;
+            var count = 0;
             foreach(var input in inputs)
             {
                 var coords = input.Split(',');

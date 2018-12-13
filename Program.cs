@@ -14,31 +14,31 @@ namespace AdventCode2018
     {
         public static void Main(string[] args)
         {
-            var coords = ParseStrings(@"Inputs\Day6.txt");
-            var parsedCoords = ParseFactory.ParseCoordinates(coords);
-            var cabber = new Taxicabber();
-            cabber.FindTheSafeRegion(parsedCoords);
+            var parsedInput = ParseStrings(@"Inputs\Day7.txt");
+            var instructions = ParseFactory.ParseInstructions(parsedInput);
+            var orderer = new StepOrderer();
+            orderer.SortOrder(instructions);
         }
 
         private void RunMethodGroups()
         {
-            var frequencies = ParseInputs(@"Inputs\Day1input.txt");
+            var frequencies = ParseInputs(@"Inputs\Day1.txt");
             CalibrationManager.PrintSums(frequencies);
             CalibrationManager.CalibrateEveryTwice(frequencies);
 
-            var idList = ParseStrings(@"Inputs\Day2input.txt");
+            var idList = ParseStrings(@"Inputs\Day2.txt");
             Scanner.ShowCheckSum(idList);
             Scanner.FindAdjescentBox(idList);
 
-            var claimsInputList = ParseStrings(@"Inputs\Day3input.txt");
+            var claimsInputList = ParseStrings(@"Inputs\Day3.txt");
             var claims = ParseFactory.ParseClaims(claimsInputList);
             Tailor.FindOverlaps(claims);
 
-            var parsedShifts = ParseStrings(@"Inputs\Day4input.txt");
+            var parsedShifts = ParseStrings(@"Inputs\Day4.txt");
             var sortedShifts = ParseFactory.ParseShifts(parsedShifts);
             GuardPicker.FindWeakestGuard(sortedShifts);
 
-            var parsedPolymer = ParseString(@"Inputs\Day5input.txt");
+            var parsedPolymer = ParseString(@"Inputs\Day5.txt");
             var myPolyzer = new Polymerizer();
             myPolyzer.React(parsedPolymer);
 

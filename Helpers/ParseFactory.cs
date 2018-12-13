@@ -65,5 +65,20 @@ namespace AdventCode2018.Helpers
 
             return coordinates;
         }
+
+        public static List<Instruction> ParseInstructions(List<string> inputs)
+        {
+            var instructions = new List<Instruction>();
+
+            foreach(var input in inputs)
+            {
+                var texts = input.Split(' ');
+                var instruct = new Instruction();
+                instruct.current = texts[1][0];
+                instruct.laterStep = texts[7][0];
+                instructions.Add(instruct);
+            }
+            return instructions;
+        }
     }
 }

@@ -118,6 +118,45 @@ public class Taxicabber {
         //Create the array with 3 dimension: x,y,closest indication
     }
 
+    public void FindTheSafeRegion(IList<Coordinate> coordinates){
+        var maxCoord = 0;
+        foreach(var coord in coordinates)
+        {
+            if (maxCoord < coord.xAxis)
+            {
+                maxCoord = coord.xAxis;
+            }
+            if(maxCoord < coord.yAxis)
+            {
+                maxCoord = coord.yAxis;
+            }
+        }
+
+        Console.WriteLine($"max grid is {maxCoord + 1}, {maxCoord + 1}");
+
+        char[,] grid = new char[maxCoord + 1,maxCoord + 1];
+        var SafeDistance = 10000;
+        var count = 0;
+        for (int i = 0; i <= maxCoord; i++)
+        {
+            for (int j = 0; j <= maxCoord; j++)
+            {
+                var totalDistance = 0;
+                foreach (var coordinate in coordinates)
+                {
+                    var distance = CalculateManhattanDistance(i, coordinate.xAxis, j, coordinate.yAxis);
+                    totalDistance += distance;                  
+                }
+                if (totalDistance < SafeDistance){
+                    grid[i,j] = '#';
+                    count++;
+                }
+            }
+        }
+
+        
+        Console.WriteLine($"Size of the region with safe locations {count}");
+    }
     private static int CalculateManhattanDistance(int x1, int x2, int y1, int y2)
     {
         return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);

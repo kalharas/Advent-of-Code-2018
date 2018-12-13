@@ -17,7 +17,7 @@ namespace AdventCode2018
             var coords = ParseStrings(@"Inputs\Day6.txt");
             var parsedCoords = ParseFactory.ParseCoordinates(coords);
             var cabber = new Taxicabber();
-            cabber.FindTheLargestArea(parsedCoords);
+            cabber.FindTheSafeRegion(parsedCoords);
         }
 
         private void RunMethodGroups()
@@ -41,6 +41,12 @@ namespace AdventCode2018
             var parsedPolymer = ParseString(@"Inputs\Day5input.txt");
             var myPolyzer = new Polymerizer();
             myPolyzer.React(parsedPolymer);
+
+            var coords = ParseStrings(@"Inputs\Day6.txt");
+            var parsedCoords = ParseFactory.ParseCoordinates(coords);
+            var cabber = new Taxicabber();
+            cabber.FindTheLargestArea(parsedCoords);
+            cabber.FindTheSafeRegion(parsedCoords);
         }
 
         public static List<int> ParseInputs(string path)

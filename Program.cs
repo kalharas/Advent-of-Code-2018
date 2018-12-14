@@ -7,6 +7,7 @@ using AdventCode2018.Puzzles.Day2;
 using AdventCode2018.Helpers;
 using AdventCode2018.Puzzles.Day3;
 using System.Threading.Tasks;
+using Helpers.Extensions;
 
 namespace AdventCode2018
 {
@@ -14,10 +15,9 @@ namespace AdventCode2018
     {
         public static void Main(string[] args)
         {
-            var parsedInput = ParseStringPure(@"Inputs\Day7.txt");
-            var orderer = new StepOrderer();
-            orderer.PartOne(parsedInput);
-            orderer.PartTwo(parsedInput);
+            var parsedInput = ParseNumbers(@"Inputs\Day8.txt");
+            var licenceCalculator = new LicenseCalculator();
+            licenceCalculator.Part1(parsedInput);
         }
 
         private void RunMethodGroups()
@@ -47,6 +47,11 @@ namespace AdventCode2018
             var cabber = new Taxicabber();
             cabber.FindTheLargestArea(parsedCoords);
             cabber.FindTheSafeRegion(parsedCoords);
+
+            var parsedInput = ParseStringPure(@"Inputs\Day7.txt");
+            var orderer = new StepOrderer();
+            orderer.PartOne(parsedInput);
+            orderer.PartTwo(parsedInput);
         }
 
         public static List<int> ParseInputs(string path)
@@ -66,6 +71,11 @@ namespace AdventCode2018
             return File.ReadAllText(path);
         }
 
+        public static IEnumerable<int> ParseNumbers(string path)
+        {
+            var parsedStrings = File.ReadAllText(path);
+            return parsedStrings.Integers();
+        }
         public static string ParseString(string path)
         {
             var inputFile = File.ReadAllText(path);

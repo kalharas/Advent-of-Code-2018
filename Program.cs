@@ -14,10 +14,10 @@ namespace AdventCode2018
     {
         public static void Main(string[] args)
         {
-            var parsedInput = ParseStrings(@"Inputs\Day7.txt");
-            var instructions = ParseFactory.ParseInstructions(parsedInput);
+            var parsedInput = ParseStringPure(@"Inputs\Day7.txt");
             var orderer = new StepOrderer();
-            orderer.SortOrder(instructions);
+            orderer.PartOne(parsedInput);
+            orderer.PartTwo(parsedInput);
         }
 
         private void RunMethodGroups()
@@ -59,6 +59,11 @@ namespace AdventCode2018
         {
             var inputFile = File.ReadAllLines(path).ToList<string>();
             return inputFile;
+        }
+
+        public static string ParseStringPure(string path)
+        {
+            return File.ReadAllText(path);
         }
 
         public static string ParseString(string path)
